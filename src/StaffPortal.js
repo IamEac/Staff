@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   Users, Calendar, MessageSquare, Mail, Bell, CheckCircle, XCircle, 
-  Send, Clock, AlertCircle, Phone, MapPin, Package, Edit, Save,
-  Eye, EyeOff, Filter, Search, ChevronDown, ChevronUp, Star,
-  FileText, UserCheck, UserX, MessageCircle, Inbox, Archive,
-  Music, Camera, Cake, UtensilsCrossed, Palette, Layout, Info,
-  UserPlus, List, Grid3x3, Trash2, Check
+  Send, Clock, AlertCircle, ChevronUp, Star, // Iconos usados
+  FileText, MessageCircle, // Iconos usados
+  Music, Camera, Cake, UtensilsCrossed, Palette, Layout, Info, // Iconos usados
+  UserPlus, Check // Iconos usados
 } from 'lucide-react';
 
 const StaffPortal = () => {
@@ -65,8 +64,8 @@ const StaffPortal = () => {
     }
   ]);
 
-  // Supplier contacts
-  const [suppliers, setSuppliers] = useState([
+  // Supplier contacts (setSuppliers eliminado si no se usa)
+  const [suppliers] = useState([
     {
       id: 1,
       name: 'Elite Catering Co.',
@@ -508,6 +507,9 @@ const StaffPortal = () => {
                   break;
                 case 'cake':
                   updatedEvent.selections.cake.name = modification.newValue;
+                  break;
+                default: // AÑADIDO: Caso por defecto para el switch
+                  console.warn(`Unhandled modification field: ${modification.field}`);
                   break;
               }
               
@@ -1524,7 +1526,7 @@ const StaffPortal = () => {
         return currentUser.role === 'salesperson' ? renderMessages() : renderDashboard();
       case 'events':
         return renderEvents();
-      default:
+      default: // AÑADIDO: Caso por defecto para el switch principal
         return renderDashboard();
     }
   };
