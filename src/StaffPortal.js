@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Users, Calendar, MessageSquare, Mail, Bell, CheckCircle, XCircle, 
-  Send, Clock, AlertCircle, Phone, MapPin, Package,
-  ChevronUp, Star,
+  Users, Calendar, MessageSquare, Bell, CheckCircle, XCircle, 
+  Send, Clock, AlertCircle,
+  ChevronUp,
   MessageCircle,
-  Music, Camera, Cake, UtensilsCrossed, Palette, Layout, Info,
-  UserPlus, List, Grid3x3, Trash2, Check
+  UtensilsCrossed, Info
 } from 'lucide-react';
 
 const StaffPortal = () => {
