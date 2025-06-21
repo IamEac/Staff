@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { 
   Users, Calendar, MessageSquare, Mail, Bell, CheckCircle, XCircle, 
-  Send, Clock, AlertCircle, ChevronUp, Star, 
-  MessageCircle, 
-  Music, Camera, Cake, UtensilsCrossed, Palette, Layout, Info, // AÑADIDO 'Layout' de nuevo
-  UserPlus, Check 
-} from 'lucide-react';
+  Send, Clock, AlertCircle, Phone, MapPin, Package, Edit, Save,
+  Eye, EyeOff, Filter, Search, ChevronDown, ChevronUp, Star,
+  FileText, UserCheck, UserX, MessageCircle, Inbox, Archive,
+  Music, Camera, Cake, UtensilsCrossed, Palette, Layout, Info,
+  UserPlus, List, Grid3x3, Trash2, Check
+} from 'lucide-react'; // Restauro todas las importaciones y luego limpiamos lo que no se usa si vuelve a dar error.
 
 const StaffPortal = () => {
   // Mock user data
@@ -212,7 +213,6 @@ const StaffPortal = () => {
           additionalSheetCakes: false
         },
         
-        // Decoration Theme
         decoration: {
           theme: 'elegant',
           name: 'Elegant Classic',
@@ -1163,7 +1163,7 @@ const StaffPortal = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-blue-500" />
                   Event Details
                 </h3>
@@ -1185,7 +1185,7 @@ const StaffPortal = () => {
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
                   <Users className="w-5 h-5 text-green-500" />
                   Guest Information
                 </h3>
@@ -1237,7 +1237,7 @@ const StaffPortal = () => {
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
                   <Package className="w-5 h-5 text-purple-500" />
                   Payment Summary
                 </h3>
@@ -1261,7 +1261,7 @@ const StaffPortal = () => {
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
                   <Phone className="w-5 h-5 text-red-500" />
                   Contact Information
                 </h3>
@@ -2303,12 +2303,18 @@ const StaffPortal = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Diamond Venue Portal</h1>
-              <p className="text-sm text-gray-600">Event #{customerData.eventDetails.eventId}</p>
+              <h1 className="text-2xl font-bold text-gray-900">Diamond Venue Staff Portal</h1>
+              <p className="text-sm text-gray-600">Internal Management System</p>
             </div>
-            <div className="text-right">
-              <p className="font-medium">{customerData.firstName} {customerData.lastName}</p>
-              <p className="text-sm text-gray-600">{customerData.email}</p>
+            <div className="flex items-center gap-4">
+              <button className="relative p-2 text-gray-400 hover:text-gray-500">
+                <Bell className="w-6 h-6" />
+                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              <div className="text-right">
+                <p className="font-medium">{currentUser.name}</p>
+                <p className="text-sm text-gray-600 capitalize">{currentUser.role}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2318,31 +2324,45 @@ const StaffPortal = () => {
       <nav className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8 overflow-x-auto">
-            {[
-              { id: 'overview', label: 'Overview', icon: Package },
-              { id: 'menu', label: 'Menu', icon: UtensilsCrossed },
-              { id: 'cake', label: 'Cake', icon: Cake },
-              { id: 'decoration', label: 'Decoration', icon: Palette },
-              { id: 'details', label: 'Event Details', icon: FileText },
-              { id: 'music', label: 'Music', icon: Music },
-              { id: 'guests', label: 'Guests', icon: Users },
-              { id: 'comments', label: 'Comments', icon: MessageSquare }
-            ].map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 px-1 border-b-2 transition-colors whitespace-nowrap
-                    ${activeTab === tab.id 
-                      ? 'border-blue-500 text-blue-600' 
-                      : 'border-transparent text-gray-500 hover:text-gray-700'}`}
-                >
-                  <Icon className="w-5 h-5" />
-                  {tab.label}
-                </button>
-              );
-            })}
+            <button
+              onClick={() => setActiveTab('dashboard')}
+              className={`py-4 px-1 border-b-2 transition-colors whitespace-nowrap
+                ${activeTab === 'dashboard' ? 'border-purple-500 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setActiveTab('events')}
+              className={`py-4 px-1 border-b-2 transition-colors whitespace-nowrap
+                ${activeTab === 'events' ? 'border-purple-500 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            >
+              Events
+            </button>
+            {currentUser.role === 'manager' && (
+              <button
+                onClick={() => setActiveTab('modifications')}
+                className={`py-4 px-1 border-b-2 transition-colors whitespace-nowrap
+                  ${activeTab === 'modifications' ? 'border-purple-500 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              >
+                Modifications
+              </button>
+            )}
+            <button
+              onClick={() => setActiveTab('suppliers')}
+              className={`py-4 px-1 border-b-2 transition-colors whitespace-nowrap
+                ${activeTab === 'suppliers' ? 'border-purple-500 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            >
+              Suppliers
+            </button>
+            {currentUser.role === 'salesperson' && (
+              <button
+                onClick={() => setActiveTab('messages')}
+                className={`py-4 px-1 border-b-2 transition-colors whitespace-nowrap
+                  ${activeTab === 'messages' ? 'border-purple-500 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              >
+                Messages
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -2352,31 +2372,32 @@ const StaffPortal = () => {
         {renderContent()}
       </main>
 
-      {/* Notification */}
-      {showNotification && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-slideIn">
-          <CheckCircle className="w-5 h-5" />
-          {notificationMessage}
+      {/* Role Switcher for Testing */}
+      <div className="fixed bottom-4 left-4 bg-white p-4 rounded-lg shadow-lg border">
+        <p className="text-sm font-medium mb-2">Test Role Switcher:</p>
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="radio"
+              name="role"
+              checked={currentUser.role === 'manager'}
+              onChange={() => setCurrentUser({...currentUser, role: 'manager'})}
+            />
+            Manager
+          </label>
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="radio"
+              name="role"
+              checked={currentUser.role === 'salesperson'}
+              onChange={() => setCurrentUser({...currentUser, role: 'salesperson'})}
+            />
+            Salesperson
+          </label>
         </div>
-      )}
-
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        .animate-slideIn {
-          animation: slideIn 0.3s ease-out;
-        }
-      `}</style>
+      </div>
     </div>
   );
 };
 
-export default CustomerPortal;
+export default StaffPortal;
